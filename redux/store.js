@@ -1,7 +1,7 @@
 import {createStore, combineReducers } from 'redux';
 const SET_SELECTED_PET = 'SET_SELECTED_PET';
 
-const initialState ={
+const initialState ={ 
     petAnimals:[
     {id:1, name:'Bruno', category:'dog', image: require('../assets/dog.png'), description:'Friendly and playful dog.'},
     {id:2, name:'Cheeku', category:'cat', image: require('../assets/cat.png'), description:'Loves to nap in the sun.'},
