@@ -94,32 +94,26 @@
 
 // export default PetsScreen;
 
-
 import React from "react";
 import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import PetDetailScreen from "../PetDetailsScreen/PetDetailsScreen";
-import { setSelectedPet } from "../../../redux/store";
+import { useSelector } from "react-redux";
 
 const PetsScreen = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-
-  // Get pets data from Redux store
-  const petsData = useSelector((state) => state.animal.petAnimals);
-
+  const petAnimals = useSelector((state) => state.animal.petAnimals);
+  
   const handleNavigation = (pet) => {
-    dispatch(setSelectedPet(pet)); // Store selected pet in Redux
-    navigation.navigate("PetDetail", { pet }); // Pass pet data to the next screen
+    navigation.navigate("PetDetail", { pet });
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Available Pets</Text>
 
+      {/* Show only first 5 pets */}
       <FlatList
-        data={petsData}
+        data={petAnimals.slice(0, 5)}
         keyExtractor={(item) => item.id.toString()}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -128,15 +122,17 @@ const PetsScreen = () => {
             <Image source={item.image} style={styles.petImage} />
             <Text style={styles.petName}>{item.name}</Text>
             <Text style={styles.petDescription}>{item.description}</Text>
-            <TouchableOpacity
-              style={styles.detailsButton}
-              onPress={() => handleNavigation(item)}
-            >
+            <TouchableOpacity style={styles.detailsButton} onPress={() => handleNavigation(item)}>
               <Text style={styles.detailsText}>View Details</Text>
             </TouchableOpacity>
           </View>
         )}
       />
+
+      {/* View All Button */}
+      <TouchableOpacity style={styles.viewAllButton} onPress={() => navigation.navigate("AllAnimalsList")}>
+        <Text style={styles.viewAllText}>View All</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -188,6 +184,19 @@ const styles = StyleSheet.create({
   detailsText: {
     color: "#fff",
     fontSize: 14,
+  },
+  viewAllButton: {
+    backgroundColor: "#86C900FF",
+    padding: 12,
+    borderRadius: 8,
+    marginHorizontal: 10,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  viewAllText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 
