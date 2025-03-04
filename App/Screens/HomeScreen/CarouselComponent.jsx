@@ -33,9 +33,10 @@ const styles = StyleSheet.create({
   slide: {
     flex: 1,
     padding:10,
+    paddingTop:0,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#fff',
+    backgroundColor: '#fff',
     borderRadius: 10,
   },
   image: {
