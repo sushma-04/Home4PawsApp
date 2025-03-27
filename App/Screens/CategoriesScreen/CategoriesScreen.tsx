@@ -9,50 +9,26 @@ import {
   Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector} from "react-redux";
+import { RootState } from "../../../redux/store";
 
 const { width } = Dimensions.get("window");
 const numColumns = 4; // Ensure at least 4 columns
 
-// Define Type for Categories
-type Category = {
-  id: string;
-  name: string;
-  image?: any;
-};
-
 const CategoriesScreen = () => {
-  const [categories, setCategories] = useState<Category[]>([
-    { id: "1", name: "Dogs", image: require("../../../assets/dog.png") },
-    { id: "2", name: "Cats", image: require("../../../assets/cat.png") },
-    { id: "3", name: "Birds", image: require("../../../assets/bird.png") },
-    { id: "4", name: "Rabbits", image: require("../../../assets/rabbit.png") },
-  ]);
-
-  const handleAddCategory = () => {
-    console.log("Open Add Category Modal");
-    // Open modal or navigate to add category screen
-  };
-
-  return (
+  // redux selectors
+ const PetCategory = useSelector((state:RootState)=>state.category.petCategories);
+ 
+ return (
     <View style={styles.container}>
       <Text style={styles.header}>Pet Categories</Text>
 
       <FlatList
-        data={[...categories, { id: "add", name: "Add" }]} // Ensures "Add" button is always there
+        data={PetCategory} 
         numColumns={numColumns}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.listContainer}
         renderItem={({ item }) => {
-          if (item.id === "add") {
-            return (
-              <></>
-              // <TouchableOpacity style={styles.addCategoryBox} onPress={handleAddCategory}>
-              //   <Ionicons name="add" size={30} color="#ff6b6b" />
-              //   <Text style={styles.addText}>Add</Text>
-              // </TouchableOpacity>
-            );
-          }
-
           return (
             <TouchableOpacity style={styles.categoryBox}>
               {item.image && <Image source={item.image} style={styles.categoryImage} />}
@@ -101,22 +77,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#333",
     marginTop: 5,
-  },
-  addCategoryBox: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "#fff",
-    borderWidth: 2,
-    borderColor: "#ff6b6b",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 10,
-  },
-  addText: {
-    fontSize: 12,
-    color: "#ff6b6b",
-    marginTop: 4,
   },
 });
 

@@ -10,6 +10,7 @@ import WelcomeScreen from './App/Screens/WelcomeScreen/WelcomeScreen';
 import PetsScreen from './App/Screens/PetsScreen/PetsScreen';
 import PetDetailScreen from './App/Screens/PetDetailsScreen/PetDetailsScreen';
 import AllAnimalsList from './App/Screens/AllAnimalsList/AllAnimalsList';
+import CategoriesScreen from './App/Screens/CategoriesScreen/CategoriesScreen';
 
 
 
@@ -18,11 +19,12 @@ export default function App() {
   return (
     <Provider store={store} >
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="Welcome">
+    <Stack.Navigator initialRouteName="Home">
       {/* <Stack.Screen name="Login" component={Login} /> */}
-      <Stack.Screen name="Welcome" component={WelcomeScreen}  options={{ headerShown: false }}/>
+      {/* <Stack.Screen name="Welcome" component={WelcomeScreen}  options={{ headerShown: false }}/> */}
       <Stack.Screen name="Home" component={HomeScreen} />     
       <Stack.Screen name="PetScreen" component={PetsScreen} />
+      <Stack.Screen name="PetCategory" component={CategoriesScreen} />
       <Stack.Screen name="PetDetail" component={PetDetailScreen} />
       <Stack.Screen name="AllAnimalsList" component={AllAnimalsList} options={{ title: "All Animals" }} />
     </Stack.Navigator>
