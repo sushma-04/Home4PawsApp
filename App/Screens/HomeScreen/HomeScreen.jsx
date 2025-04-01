@@ -5,6 +5,7 @@ import CategoriesScreen from '../CategoriesScreen/CategoriesScreen'
 import AdoptionScreen from '../AdoptionScreen/AdoptionScreen'
 import { ScrollView } from 'react-native-gesture-handler'
 import PetsScreen from '../PetsScreen/PetsScreen'
+import EventsList from '../EventsScreen/EventsList'
 
 export default function HomeScreen() {
   return (
@@ -13,6 +14,7 @@ export default function HomeScreen() {
    <CarouselComponent/>
    <CategoriesScreen/>
    <PetsScreen/>
+   <EventsList/>
    {/* <AdoptionScreen/> */}
    </ScrollView>
    
